@@ -10,10 +10,16 @@ type exp =
   | BinOp of binOp * exp * exp
   (* BinOp(Plus, ILit 4, Var "x") --> 4 + x *)
   | IfExp of exp * exp * exp
-  (* IfExp(BinOp(Lt, Var "x", ILit 4), 
-           ILit 3, 
-           Var "x") --> 
+  (* IfExp(BinOp(Lt, Var "x", ILit 4),
+           ILit 3,
+           Var "x") -->
      if x<4 then 3 else x *)
+  | LetExp of id * exp * exp
+  | FunExp of id * exp
+  | AppExp of exp * exp
+  | LetRecExp of id * id * exp * exp
 
-type program = 
+type program =
     Exp of exp
+  | Decl of id * exp
+  | RecDecl of id * id * exp
